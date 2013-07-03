@@ -1,0 +1,5 @@
+syntax: regexp
+^NQueens/Debug/.*$
+^NQueens/Release/.*$
+^Debug/.*$
+^Release/.*$
