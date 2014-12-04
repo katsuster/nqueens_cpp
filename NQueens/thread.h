@@ -14,25 +14,21 @@
 
 using namespace std;
 
-namespace katsuster
-{
-	class Thread
-	{
+namespace katsuster {
+	class Thread {
 	public:
-		Thread() {
-			Thread(NULL);
-		};
+		Thread() : r(NULL) {
+			//do nothing
+		}
 
-		Thread(Runnable *r) {
-			this->r = r;
-
+		Thread(Runnable *r) : r(r) {
 #if defined(_WIN32)
 			hthr = NULL;
 			tid = 0;
 #elif defined(__unix)
 			thr_exist = 0;
 #endif
-		};
+		}
 
 		virtual ~Thread() {
 #if defined(_WIN32)
@@ -48,9 +44,9 @@ namespace katsuster
 				thr_exist = 0;
 			}
 #endif
-		};
+		}
 
-		void start () {
+		void start() {
 #if defined(_WIN32)
 			hthr = CreateThread(NULL, 0, 
 				ThreadProc, this, 0, &tid);
@@ -68,11 +64,11 @@ namespace katsuster
 					"pthread_create() failed.");
 			}
 #endif
-		};
+		}
 
 		void run() {
 			r->run();
-		};
+		}
 
 		void join() {
 			if (r == NULL) {
@@ -99,7 +95,7 @@ namespace katsuster
 				throw runtime_error("pthread_join() failed.");
 			}
 #endif
-		};
+		}
 
 	protected:
 #if defined(_WIN32)
@@ -109,7 +105,7 @@ namespace katsuster
 			t->run();
 
 			return 0;
-		};
+		}
 #elif defined(__unix)
 		static void *start_routine(void *arg) {
 			Thread *t = (Thread *)arg;
@@ -117,7 +113,7 @@ namespace katsuster
 			t->run();
 
 			return NULL;
-		};
+		}
 #endif
 
 	private:
@@ -131,6 +127,6 @@ namespace katsuster
 		pthread_t thr;
 #endif
 	};
-};
+}
 
 #endif //THREAD_H__

@@ -9,10 +9,8 @@
 #	include <sys/time.h>
 #endif
 
-namespace katsuster
-{
-	class TimeNow
-	{
+namespace katsuster {
+	class TimeNow {
 	public:
 		static long long microtime() {
 			long long ull;
@@ -41,7 +39,7 @@ namespace katsuster
 #endif
 
 			return ull;
-		};
+		}
 	};
 }
 

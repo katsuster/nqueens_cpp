@@ -5,30 +5,25 @@
 
 namespace katsuster
 {
-	class Solver : public Runnable
-	{
+	class Solver : public Runnable {
 	public:
-		Solver(int row, int left, int right, int n, int y, long answer) {
-			this->row = row;
-			this->left = left;
-			this->right = right;
-			this->n = n;
-			this->y = y;
-			this->answer = answer;
-			this->new_answer = 0;
-		};
+		Solver(int row, int left, int right, int n, int y, long answer) 
+			: row(row), left(left), right(right), 
+			n(n), y(y), answer(answer), new_answer(0) {
+			//do nothing
+		}
 
 		virtual ~Solver() {
 			//do nothing
-		};
+		}
 
 		virtual long get_new_answer() {
 			return new_answer;
-		};
+		}
 
 		virtual void run() {
 			new_answer = solve_inner(row, left, right, n, y, answer);
-		};
+		}
 
 	protected:
 		static long solve_inner(int row, int left, int right, int n, int y, long answer) {
@@ -54,7 +49,7 @@ namespace katsuster
 			}
 
 			return answer;
-		};
+		}
 
 	private:
 		int row;
@@ -65,6 +60,6 @@ namespace katsuster
 		long answer;
 		long new_answer;
 	};
-};
+}
 
 #endif //SOLVER_H__
